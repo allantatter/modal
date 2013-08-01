@@ -1,0 +1,21 @@
+@import "compass/css3/border-radius";
+
+.modal {
+    width: 600px;
+
+    .close {
+        position: absolute;
+        top: -19px;
+        right: -19px;
+        width: 30px;
+        height: 30px;
+        border: 5px solid #666;
+        background-color: #fff;
+        cursor: pointer;
+        @include border-radius(20px);
+    }
+
+    img {
+        max-width: 100%;
+    }
+}

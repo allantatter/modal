@@ -1,0 +1,74 @@
+@import "compass/css3/opacity";
+@import "compass/css3/transition";
+
+html {
+    overflow-y: scroll;
+}
+
+.scrollbar-measure {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+    position: absolute;
+    top: -9999px;
+}
+
+.modal-open-plus-animation {
+    overflow: hidden;
+
+    body {
+        overflow: hidden;
+    }
+}
+
+.modal {
+    position: relative;
+    z-index: 1050;
+    display: none;
+    margin: 100px auto;
+    outline: none;
+
+    &.fade {
+        @include opacity(0);
+        @include transition(opacity 300ms ease);
+    }
+
+    &.in {
+        display: block;
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+}
+
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    background-color: #000000;
+    display: none;
+
+    &.fade {
+        @include opacity(0);
+        @include transition(opacity 150ms ease);
+    }
+
+    &.in {
+        display: block;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+}
