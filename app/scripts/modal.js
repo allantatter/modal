@@ -26,7 +26,7 @@
  * limitations under the License.
  * ======================================================================== */
 
- (function ($) {
+(function ($) {
 
     'use strict';
 
@@ -37,6 +37,10 @@
         var that = this;
         this.options   = options;
         this.$element  = $(element).on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this));
+        if (!this.$element.hasClass('delay')) {
+            this.options.delayBackdrop = 1;
+            this.options.delayModal = 1;
+        }
         this.$backdrop = $('#modal-backdrop').on('click.dismiss.modal', $.proxy(this.hide, this));
         this.isShown   = null;
         this.$element.parent().on('click.dismiss.modal', $.proxy(this.hide, this));
@@ -50,7 +54,9 @@
 
     Modal.DEFAULTS = {
         keyboard: true,
-        show: true
+        show: true,
+        delayBackdrop: 150,
+        delayModal: 300
     };
 
     Modal.prototype.toggle = function () {
@@ -82,7 +88,8 @@
                 that.$element.appendTo(document.body); // don't move modals dom position
             }
 
-            setTimeout(function(){
+
+            that.delay(that.options.delayModal, function(){
                 that.$element.show();
 
                 if (transition) {
@@ -91,7 +98,7 @@
                     })();
                 }
 
-                setTimeout(function(){
+                that.delay(that.options.delayModal, function(){
                     that.$element
                         .addClass('in');
                 }, 1);
@@ -103,11 +110,11 @@
                         .one($.support.transition.end, function () {
                             that.$element.focus().trigger('shown.modal');
                         })
-                        .emulateTransitionEnd(300);
+                        .emulateTransitionEnd(that.options.delayModal);
                 } else {
                     that.$element.focus().trigger('shown.modal');
                 }
-            }, 300);
+            });
         });
     };
 
@@ -140,7 +147,7 @@
         if ($.support.transition && this.$element.hasClass('fade')) {
             this.$element
                 .one($.support.transition.end, $.proxy(this.hideModal, this))
-                .emulateTransitionEnd(300);
+                .emulateTransitionEnd(this.options.delayModal);
         } else {
             this.hideModal();
         }
@@ -204,7 +211,7 @@
             }
 
             this.$backdrop.show();
-            setTimeout(function(){
+            this.delay(this.options.delayBackdrop, function(){
                 that.$backdrop.addClass('in');
             }, 1);
 
@@ -215,21 +222,22 @@
             if (doAnimate) {
                 this.$backdrop
                     .one($.support.transition.end, callback)
-                    .emulateTransitionEnd(150);
+                    .emulateTransitionEnd(this.options.delayBackdrop);
             } else {
                 callback();
             }
 
         } else if (!this.isShown && this.$backdrop) {
             this.$backdrop.removeClass('in');
-            setTimeout(function(){
+
+            this.delay(this.options.delayBackdrop, function(){
                 that.$backdrop.hide();
-            }, 150);
+            });
 
             if ($.support.transition && this.$element.hasClass('fade')) {
                 this.$backdrop
                     .one($.support.transition.end, callback)
-                    .emulateTransitionEnd(150);
+                    .emulateTransitionEnd(this.options.delayBackdrop);
             } else {
                 callback();
             }
@@ -273,12 +281,28 @@
 
         this.$element.removeClass('in');
 
-        setTimeout(function(){
+        this.delay(that.options.delayBackdrop, function(){
             that.$element.unwrap();
             that.$element.hide();
 
             modalClick(btn, e);
-        }, 150);
+        });
+    };
+
+    Modal.prototype.delay = function(delay, callback, max) {
+        if (typeof max === 'undefined') {
+            max = null;
+        }
+
+        if (max > 0 && delay > max) {
+            delay = 1;
+        }
+
+        if (delay > 0) {
+            setTimeout(callback, delay);
+        } else {
+            callback();
+        }
     };
 
     var modalClick = function(that, e) {

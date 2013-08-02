@@ -60,6 +60,7 @@ html {
     z-index: 1030;
     background-color: #000000;
     display: none;
+    @include opacity(0.5);
 
     &.fade {
         @include opacity(0);
