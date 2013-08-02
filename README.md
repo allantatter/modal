@@ -1,4 +1,4 @@
 Modal
 =====
 
-The Best, very customizable Modal you've ever seen.
+The Best customizable Modal you've ever seen.
