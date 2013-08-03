@@ -37,10 +37,6 @@
         var that = this;
         this.options   = options;
         this.$element  = $(element).on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this));
-        if (!this.$element.hasClass('delay')) {
-            this.options.delayBackdrop = 1;
-            this.options.delayModal = 1;
-        }
         this.$backdrop = $('#modal-backdrop').on('click.dismiss.modal', $.proxy(this.hide, this));
         this.isShown   = null;
         this.$element.parent().on('click.dismiss.modal', $.proxy(this.hide, this));
