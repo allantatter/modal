@@ -313,7 +313,7 @@
             defaultMarginBottom: that.$element.css('margin-bottom'),
             lastWindowHeight: $(window).height(),
             initModal: true
-        }
+        };
 
         this.onModalInitAndResize(function(){
             var modalHeight = that.$element.height();
@@ -340,7 +340,7 @@
                 });
             }
         });
-    }
+    };
 
     Modal.prototype.onModalInitAndResize = function(callback) {
         callback();
@@ -348,7 +348,7 @@
         $(window).resize(function(){
             callback();
         });
-    }
+    };
 
     var modalClick = function(that, e) {
         var $this   = $(that);
