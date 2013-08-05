@@ -74,6 +74,12 @@ Default values are `data-delay-modal="300"` and `data-delay-backdrop="150"`
 
     <div id="myModal" class="modal fade" tabindex="-1" data-delay-modal="300" data-delay-backdrop="150"></div>
 
+### Center modal vertically
+
+You can center modal vertically by adding attribute `data-center-vertically="true"` to the modal element.
+
+    <div id="myModal" class="modal fade" tabindex="-1" data-center-vertically="true"></div>
+
 Licence
 -------
 
