@@ -1,0 +1,63 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css({.tmp,app}) styles/normalize.css -->
+        <link rel="stylesheet" href="/bower_components/normalize-css/normalize.css">
+        <!-- endbuild -->
+        <!-- build:css({.tmp,app}) styles/modal.css -->
+        <link rel="stylesheet" href="/styles/modal.css">
+        <!-- endbuild -->
+        <!-- build:css({.tmp,app}) styles/modal.custom.css -->
+        <link rel="stylesheet" href="/styles/modal.custom.css">
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <input type="button" data-target="#myModal" data-toggle="modal" value="Modal1">
+        <input type="button" data-target="#myModal2" data-toggle="modal" value="Modal2">
+
+        <ul>
+            <li>Backdrop: true</li>
+            <li>Modal delay: true</li>
+            <li>Modal fade: true</li>
+            <li>Backdrop delay: true</li>
+            <li>Backdrop fade: true</li>
+            <li>Center vertically: true</li>
+        </ul>
+
+        <!-- Modal -->
+        <div id="modal-backdrop" class="modal-backdrop fade"></div>
+        <div id="myModal" class="modal fade" tabindex="-1" data-center-vertically="true">
+            <div class="close" data-dismiss="modal"></div>
+            <img src="/images/image1.jpg" alt="">
+            <img src="/images/image2.jpg" alt="">
+            <img src="/images/image3.jpg" alt="">
+            <img src="/images/image4.jpg" alt="">
+            <button data-dismiss="modal">Close</button>
+            <button data-target="#myModal2" data-switch="modal">Modal2</button>
+        </div>
+        <div id="myModal2" class="modal fade" tabindex="-1" data-center-vertically="true">
+            <div class="close" data-dismiss="modal"></div>
+            <img src="/images/image5.jpg" alt="">
+            <button data-dismiss="modal">Close</button>
+            <button data-target="#myModal" data-switch="modal">Modal1</button>
+        </div>
+
+        <!-- build:js scripts/main.js -->
+        <script src="/bower_components/jquery/jquery.min.js"></script>
+        <script src="/scripts/modal.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
