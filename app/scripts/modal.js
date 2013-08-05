@@ -38,6 +38,9 @@
         this.options   = options;
         this.$element  = $(element).on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this));
         this.$backdrop = $('#modal-backdrop').on('click.dismiss.modal', $.proxy(this.hide, this));
+        if (this.options.centerVertically) {
+            this.centerVertically();
+        }
         this.isShown   = null;
         this.$element.parent().on('click.dismiss.modal', $.proxy(this.hide, this));
         this.$element.on('click.dismiss.modal', function(e){
@@ -52,7 +55,8 @@
         keyboard: true,
         show: true,
         delayBackdrop: 150,
-        delayModal: 300
+        delayModal: 300,
+        centerVertically: false
     };
 
     Modal.prototype.toggle = function () {
@@ -300,6 +304,51 @@
             callback();
         }
     };
+
+    Modal.prototype.centerVertically = function() {
+        var that = this;
+
+        var cache = {
+            defaultMarginTop: that.$element.css('margin-top'),
+            defaultMarginBottom: that.$element.css('margin-bottom'),
+            lastWindowHeight: $(window).height(),
+            initModal: true
+        }
+
+        this.onModalInitAndResize(function(){
+            var modalHeight = that.$element.height();
+            var windowHeight = $(window).height();
+
+            if (windowHeight === cache.lastWindowHeight && !cache.initModal) {
+                return;
+            }
+
+            cache.initModal = false;
+
+            if ((modalHeight + 2 * parseInt(cache.defaultMarginTop, 10)) < windowHeight) {
+                var modalMarginTop = ((windowHeight - modalHeight) / 2) + 'px';
+                var modalMarginBottom = '0px';
+
+                that.$element.css({
+                    marginTop: modalMarginTop,
+                    marginBottom: modalMarginBottom
+                });
+            } else {
+                that.$element.css({
+                    marginTop: cache.defaultMarginTop,
+                    marginBottom: cache.defaultMarginBottom
+                });
+            }
+        });
+    }
+
+    Modal.prototype.onModalInitAndResize = function(callback) {
+        callback();
+
+        $(window).resize(function(){
+            callback();
+        });
+    }
 
     var modalClick = function(that, e) {
         var $this   = $(that);
