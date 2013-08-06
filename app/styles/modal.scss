@@ -35,8 +35,7 @@ html {
 
     &.in {
         display: block;
-        opacity: 1;
-        filter: alpha(opacity=100);
+        @include opacity(1);
     }
 }
 
@@ -69,7 +68,6 @@ html {
 
     &.in {
         display: block;
-        opacity: 0.5;
-        filter: alpha(opacity=50);
+        @include opacity(0.5);
     }
 }
