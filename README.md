@@ -80,6 +80,29 @@ You can center modal vertically by adding attribute `data-center-vertically="tru
 
     <div id="myModal" class="modal fade" tabindex="-1" data-center-vertically="true"></div>
 
+All attributes
+--------------
+
+### Open button
+
+* `data-toggle="modal"` - button will open modal on click
+* `data-target="#myModal"` - button opens modal with `id="myModal"`
+
+### Modal element
+
+* `data-delay-modal="300"` - number of milliseconds of css transition duration (with modal div with `class="fade"`, otherwise the delay between showing backdrop and modal)
+* `data-delay-backdrop="150"` - number of milliseconds of css transition duration (with backdrop div with `class="fade"`, otherwise no effect)
+* `data-center-vertically="true"` - calculates margin-top with javascript to center modal vertically (calculation happens when modal is initialized and on window resize)
+
+### Close button
+
+* `data-dismiss="modal"` - closes open modal on click
+
+### Switch button
+
+* `data-switch="modal"` - button will close open modal and open another
+* `data-target="#myModal"` - button opens modal with `id="myModal"`
+
 Licence
 -------
 
