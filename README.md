@@ -13,12 +13,22 @@ Dependencies
 Browser support
 ---------------
 
-Sorry guys, haven't been time yet to test enough.
+* IE 8+
+* Firefox 22+
+* Chrome 28+
+* Opera 12+
 
-Right now I can say that it works on
+### Known issues
 
-* Firefox 22
-* Chrome 28
+#### IE 8-10 - Scroll jump (should be fixed)
+If modal is opened and modal is large enough that bowser window is scrollable vertically and horizontally, then clicking on either scrollbar makes it jump.
+
+#### IE 8-9 - No css transition support
+Fading is not working because of not supporting css transitions. Fallback is showing backdrop right away and then will be a delay which is equal to the duration of css transition and then will the modal be shown.
+
+#### Opera 12 - Modal margin-bottom
+Modal `margin-bottom: 100px` has no effect
+
 
 Usage
 -----
